@@ -29,8 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.durand.composecomponentandroid.home.HomeScreen
+import com.durand.composecomponentandroid.navigation.NavigationDrawer
 import com.durand.composecomponentandroid.navigation.TopBar
 import com.durand.composecomponentandroid.ui.theme.ComposeComponentAndroidTheme
+import com.durand.composecomponentandroid.util.DrawerItem
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -52,7 +54,27 @@ class MainActivity : ComponentActivity() {
                         drawerContent = {
                             ModalDrawerSheet() {
                                 /* Drawer content */
-                                Text(text = "holaandaaa")
+                                NavigationDrawer(
+                                    name = "Josue Durand",
+                                    email = "josh@gmail.com",
+                                    items = DrawerItem.values().toList()
+                                ) {
+                                    when(it){
+                                        DrawerItem.ABOUT -> {
+                                           println()
+                                        }
+                                        DrawerItem.SETTINGS -> {
+                                            println()
+                                        }
+                                        DrawerItem.PERSONAL -> {
+                                            println()
+                                        }
+
+                                    }
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
+                                }
                             }
                         },
                     ) {

@@ -1,16 +1,16 @@
 package com.durand.composecomponentandroid.util
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class DrawerItem(
     val icon: ImageVector,
     val text: String
 ) {
-    ABOUT(Icons.Default.Info, "About"),
-    SETTINGS(Icons.Default.Settings, "Settings"),
-    PERSONAL(Icons.Default.Person, "Personal")
+    ABOUT(Icons.Outlined.Info, "About"),
+    SETTINGS(Icons.Outlined.Settings, "Settings"),
+    PERSONAL(Icons.Outlined.Person, "Personal")
 }

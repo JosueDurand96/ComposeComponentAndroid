@@ -10,9 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.durand.composecomponentandroid.ui.theme.ComposeComponentAndroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,8 +34,16 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate("detail/$it ")
                             }
                         }
-                        composable("detail/{body}") {
+                        composable(
+                            route = "detail/{body}",
+                            arguments = listOf(
+                                navArgument("body") {
+                                    type = NavType.StringType
+                                }
+                            )
+                        ) {
                             val body = it.arguments?.getString("body") ?: ""
+
                             DetailScreen(body)
                         }
                     }

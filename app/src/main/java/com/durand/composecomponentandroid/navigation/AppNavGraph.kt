@@ -1,4 +1,4 @@
-package com.durand.composecomponentandroid
+package com.durand.composecomponentandroid.navigation
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,14 +12,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.durand.composecomponentandroid.home.HomeScreen
-import com.durand.composecomponentandroid.settings.SettingsScreen
+import com.durand.composecomponentandroid.screens.DetailScreen
+import com.durand.composecomponentandroid.screens.HomeScreen
+import com.durand.composecomponentandroid.screens.SettingsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SampleAppNavGraph(
+fun AppNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
@@ -27,7 +28,7 @@ fun SampleAppNavGraph(
 ) {
 
     val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = currentNavBackStackEntry?.destination?.route ?: AllDestinations.HOME
+    val currentRoute = currentNavBackStackEntry?.destination?.route ?: Destinations.HOME
     val navigationActions = remember(navController) {
         AppNavigationActions(navController)
     }
@@ -37,34 +38,42 @@ fun SampleAppNavGraph(
             route = currentRoute,
             navigateToHome = { navigationActions.navigateToHome() },
             navigateToSettings = { navigationActions.navigateToSettings() },
+            navigateToDetail = { navigationActions.navigateToDetail() },
             closeDrawer = { coroutineScope.launch { drawerState.close() } },
             modifier = Modifier
         )
     }, drawerState = drawerState) {
         Scaffold(
             topBar = {
-                TopAppBar(title = { Text(text = currentRoute) },
+                TopAppBar(
+                    title = { Text(text = currentRoute) },
                     modifier = Modifier.fillMaxWidth(),
-                    navigationIcon = { IconButton(onClick = {
-                        coroutineScope.launch { drawerState.open() }
-                    }, content = {
-                        Icon(
-                            imageVector = Icons.Default.Menu, contentDescription = null
-                        )
-                    })
-                }, colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer))
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            coroutineScope.launch { drawerState.open() }
+                        }, content = {
+                            Icon(
+                                imageVector = Icons.Default.Menu, contentDescription = null
+                            )
+                        })
+                    },
+                    colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                )
             }, modifier = Modifier
         ) {
             NavHost(
-                navController = navController, startDestination = AllDestinations.HOME, modifier = modifier.padding(it)
+                navController = navController,
+                startDestination = Destinations.HOME,
+                modifier = modifier.padding(it)
             ) {
-
-                composable(AllDestinations.HOME) {
+                composable(Destinations.HOME) {
                     HomeScreen()
                 }
-
-                composable(AllDestinations.SETTINGS) {
+                composable(Destinations.SETTINGS) {
                     SettingsScreen()
+                }
+                composable(Destinations.DETAIL) {
+                    DetailScreen()
                 }
             }
         }

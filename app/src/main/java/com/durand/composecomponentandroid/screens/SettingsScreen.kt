@@ -1,4 +1,4 @@
-package com.durand.composecomponentandroid.settings
+package com.durand.composecomponentandroid.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

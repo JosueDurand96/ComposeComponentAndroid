@@ -70,9 +70,8 @@ fun ComposeComponentAndroidTheme(
     )
 }
 @Composable
-fun SampleDrawerTheme(
+fun DrawerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -91,7 +90,6 @@ fun SampleDrawerTheme(
             ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
         }
     }
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = SampleDrawerTypography,

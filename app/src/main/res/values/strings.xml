@@ -2,4 +2,5 @@
     <string name="app_name">ComposeComponentAndroid</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
+    <string name="detail">Detail</string>
 </resources>

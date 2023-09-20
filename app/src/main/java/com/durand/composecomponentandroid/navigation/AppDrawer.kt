@@ -1,4 +1,4 @@
-package com.durand.composecomponentandroid
+package com.durand.composecomponentandroid.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import com.durand.composecomponentandroid.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,6 +27,7 @@ fun AppDrawer(
     modifier: Modifier = Modifier,
     navigateToHome: () -> Unit = {},
     navigateToSettings: () -> Unit = {},
+    navigateToDetail: () -> Unit = {},
     closeDrawer: () -> Unit = {}
 ) {
     ModalDrawerSheet(modifier = Modifier) {
@@ -57,6 +59,17 @@ fun AppDrawer(
             icon = { Icon(imageVector = Icons.Default.Person, contentDescription = null) },
             shape = MaterialTheme.shapes.small
         )
+
+        NavigationDrawerItem(
+            label = { Text(text = stringResource(id = R.string.detail), style = MaterialTheme.typography.labelSmall) },
+            selected = route == AllDestinations.DETAIL,
+            onClick = {
+                navigateToDetail()
+                closeDrawer()
+            },
+            icon = { Icon(imageVector = Icons.Default.Person, contentDescription = null) },
+            shape = MaterialTheme.shapes.small
+        )
     }
 }
 
@@ -81,7 +94,6 @@ fun DrawerHeader(modifier: Modifier) {
                 .clip(CircleShape)
         )
         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.spacer_padding)))
-
         Text(
             text = stringResource(id = R.string.app_name),
             textAlign = TextAlign.Center,

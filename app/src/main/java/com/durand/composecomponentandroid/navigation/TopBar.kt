@@ -17,13 +17,17 @@ import com.durand.composecomponentandroid.ui.theme.Purple40
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
+    modifier: Modifier = Modifier,
     onMenuClick: () -> Unit,
 ) {
     TopAppBar(
+        modifier = modifier.fillMaxWidth(),
         colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Purple40),
-        title = { Text(text = "Navigation Drawer Josh", color = Color.White) },
+        title = { Text(text = "Android Dev Peru", color = Color.White) },
         navigationIcon = {
-            IconButton(onClick = { onMenuClick() }) {
+            IconButton(onClick = {
+                onMenuClick()
+            }) {
                 Icon(
                     imageVector = Icons.Default.Menu, contentDescription = "drawer",
                     tint = Color.White

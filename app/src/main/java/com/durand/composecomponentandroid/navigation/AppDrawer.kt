@@ -7,11 +7,15 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -19,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.durand.composecomponentandroid.R
+import com.durand.composecomponentandroid.ui.theme.Purple40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,34 +45,32 @@ fun AppDrawer(
                     style = MaterialTheme.typography.labelSmall
                 )
             },
-            selected = route == AllDestinations.HOME,
+            selected = route == Destinations.HOME,
             onClick = {
                 navigateToHome()
                 closeDrawer()
             },
-            icon = { Icon(imageVector = Icons.Default.Home, contentDescription = null) },
+            icon = { Icon(imageVector = Icons.Outlined.Home, contentDescription = null) },
             shape = MaterialTheme.shapes.small
         )
-
         NavigationDrawerItem(
             label = { Text(text = stringResource(id = R.string.settings), style = MaterialTheme.typography.labelSmall) },
-            selected = route == AllDestinations.SETTINGS,
+            selected = route == Destinations.SETTINGS,
             onClick = {
                 navigateToSettings()
                 closeDrawer()
             },
-            icon = { Icon(imageVector = Icons.Default.Person, contentDescription = null) },
+            icon = { Icon(imageVector = Icons.Outlined.Settings, contentDescription = null) },
             shape = MaterialTheme.shapes.small
         )
-
         NavigationDrawerItem(
             label = { Text(text = stringResource(id = R.string.detail), style = MaterialTheme.typography.labelSmall) },
-            selected = route == AllDestinations.DETAIL,
+            selected = route == Destinations.DETAIL,
             onClick = {
                 navigateToDetail()
                 closeDrawer()
             },
-            icon = { Icon(imageVector = Icons.Default.Person, contentDescription = null) },
+            icon = { Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = null) },
             shape = MaterialTheme.shapes.small
         )
     }
@@ -80,7 +83,7 @@ fun DrawerHeader(modifier: Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Start,
         modifier = modifier
-            .background(MaterialTheme.colorScheme.secondary)
+            .background(Purple40)
             .padding(dimensionResource(id = R.dimen.header_padding))
             .fillMaxWidth()
     ) {
@@ -95,7 +98,7 @@ fun DrawerHeader(modifier: Modifier) {
         )
         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.spacer_padding)))
         Text(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = R.string.name_drawer),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onPrimary,
@@ -103,8 +106,8 @@ fun DrawerHeader(modifier: Modifier) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun DrawerHeaderPreview() {
-    AppDrawer(modifier = Modifier, route = AllDestinations.HOME)
+    AppDrawer(modifier = Modifier, route = Destinations.HOME)
 }

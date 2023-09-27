@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.durand.composecomponentandroid.R
 import com.durand.composecomponentandroid.ui.theme.Purple40
+import kotlinx.coroutines.selects.select
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +55,12 @@ fun AppDrawer(
             shape = MaterialTheme.shapes.small
         )
         NavigationDrawerItem(
-            label = { Text(text = stringResource(id = R.string.settings), style = MaterialTheme.typography.labelSmall) },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.settings),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
             selected = route == Destinations.SETTINGS,
             onClick = {
                 navigateToSettings()
@@ -63,8 +69,14 @@ fun AppDrawer(
             icon = { Icon(imageVector = Icons.Outlined.Settings, contentDescription = null) },
             shape = MaterialTheme.shapes.small
         )
+
         NavigationDrawerItem(
-            label = { Text(text = stringResource(id = R.string.detail), style = MaterialTheme.typography.labelSmall) },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.detail),
+                    style = MaterialTheme.typography.labelSmall
+                )
+            },
             selected = route == Destinations.DETAIL,
             onClick = {
                 navigateToDetail()
